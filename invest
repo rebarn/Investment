@@ -1,0 +1,46 @@
+package Investment;
+
+public class Investment {
+
+
+    private double balance;
+    private double rate;
+    private int year;
+
+
+    public Investment(double aBlance, double aRate){
+        balance =aBlance;
+        rate = aRate;
+        year = 0;
+    }
+    public void waitForBalance(double targetBalance){
+        while (balance < targetBalance)
+        {
+            year++;
+            double interest = balance * rate/100;
+            balance = balance + interest;
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public int getYear() {
+        return year;
+    }
+    
+    public class InvestmentRunner {
+
+    public static void main(String[] args) {
+        // sets the start balance of the account
+        final double INITIAL_BALANCE = 40000;
+        // sets the interest rate
+        final double Rate = 5;
+        Investment invest = new Investment(INITIAL_BALANCE, Rate);
+        invest.waitForBalance(3*INITIAL_BALANCE);
+        int years = invest.getYear();
+        System.out.println(invest.getBalance());
+        System.out.println("The investment doubled after " + years + " years");
+    }
+}
